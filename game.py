@@ -3,14 +3,14 @@ import random
 
 # Constantes
 CLOCK = pygame.time.Clock()
-BG = pygame.image.load('bg.jpg')
-THAY_BG = pygame.image.load('thay1.png')
 WIDTH = 800
 HEIGHT = 500
 RUN = True
 
 # Classe da jogador
 class Thay():
+    THAY_BG = pygame.image.load('thay1.png')
+
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
@@ -20,7 +20,7 @@ class Thay():
 
     # Função para desenhar o jogador
     def draw(self, janela):
-        janela.blit(THAY_BG, (self.x, self.y))
+        janela.blit(self.THAY_BG, (self.x, self.y))
 
 # Classe do inimigo
 class Inimigo():
@@ -57,6 +57,8 @@ class Projetil():
 
 # Função para desenhos na tela
 def drawWindow(janela, ThayNave, projeteis, inimigos):
+    BG = pygame.image.load('bg.jpg')
+
     janela.blit(BG, (0, 0))
     ThayNave.draw(janela)
     # inimigo.draw(janela)
