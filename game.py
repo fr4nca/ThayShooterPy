@@ -1,4 +1,5 @@
 import pygame
+import random
 
 # Constantes
 CLOCK = pygame.time.Clock()
@@ -20,7 +21,23 @@ class Thay():
     # Função para desenhar o jogador
     def draw(self, janela):
         janela.blit(THAY_BG, (self.x, self.y))
-        
+
+# Classe do inimigo
+class Inimigo():
+    def __init__(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.vel = random.randint(-3, -1)
+    
+    def draw(self, janela):
+        pygame.draw.rect(janela, (255, 255, 255), (self.x, self.y, self.width, self.height))
+        self.move()
+    
+    def move(self):
+        self.x += self.vel
+    
 # Classe do projétil
 class Projetil():
     def __init__(self, x, y, radius, color):
@@ -33,17 +50,29 @@ class Projetil():
     # Função para desenhar um projetil
     def draw(self, janela):
         pygame.draw.circle(janela, self.color, (self.x, self.y), self.radius)
+        self.move()
+    
+    def move(self):
+        self.x += self.vel
 
 # Função para desenhos na tela
-def drawWindow(janela, ThayNave, projeteis):
+def drawWindow(janela, ThayNave, projeteis, inimigos):
     janela.blit(BG, (0, 0))
     ThayNave.draw(janela)
+    # inimigo.draw(janela)
+    for inimigo in inimigos:
+        inimigo.draw(janela)
+        if inimigo.x < 0 - inimigo.width:
+            inimigos.pop(inimigos.index(inimigo))
+
     for projetil in projeteis:
         projetil.draw(janela)
+        if projetil.x > WIDTH:
+            projeteis.pop(projeteis.index(projetil))
     pygame.display.update()
 
 # Função de movimentos e teclas
-def movimentos(ThayNave, projeteis):
+def movimentos(ThayNave, projeteis, inimigos):
     global RUN
 
     keys = pygame.key.get_pressed()
@@ -62,18 +91,17 @@ def movimentos(ThayNave, projeteis):
         ThayNave.y -= ThayNave.vel
 
 # Movimentos do projétil
-    for projetil in projeteis:
-        if projetil.x < WIDTH:
-            projetil.x += projetil.vel
-        else:
-            projeteis.pop(projeteis.index(projetil))
     # Atira o projétil
     if keys[pygame.K_x]:
         if len(projeteis) < 50:
-            if len(projeteis) > 0 and projeteis[len(projeteis) - 1].x > ThayNave.x + 60:
+            if len(projeteis) > 0 and projeteis[len(projeteis) - 1].x > ThayNave.x + 50:
                 projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0)))
             elif len(projeteis) == 0: 
                 projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0)))
+
+# Movimento do inimigo
+    if len(inimigos) < 8:
+        inimigos.append(Inimigo(random.randint(WIDTH, WIDTH + 300), random.randint(0, HEIGHT - 60), 60, 60))
 
     if keys[pygame.K_ESCAPE]:
         RUN = False
@@ -83,17 +111,15 @@ def movimentos(ThayNave, projeteis):
             RUN = False
 
 # Função de início
-def run(ThayNave, projeteis):
-    global RUN
-
+def run(ThayNave, projeteis, inimigos):
     janela = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("ThayShooter")
 
     while RUN:
         CLOCK.tick(60)
 
-        movimentos(ThayNave, projeteis)
-        drawWindow(janela, ThayNave, projeteis)
+        movimentos(ThayNave, projeteis, inimigos)
+        drawWindow(janela, ThayNave, projeteis, inimigos)
 
     pygame.quit()
 
@@ -101,4 +127,5 @@ if __name__ == "__main__":
     pygame.init()
     ThayNave = Thay(40, 40, 64, 48)
     projeteis = []
-    run(ThayNave, projeteis)
+    inimigos = []
+    run(ThayNave, projeteis, inimigos)
