@@ -14,6 +14,8 @@ PROJETIL_Y = THAY_Y + ((THAY_HEIGHT / 2) - PROJETIL_HEIGHT / 2)
 PROJETIL_VEL = 4
 PROJETIL_IS_MOVING = False
 RUN = True
+
+
 #MERGEEEEEE THAAAAAAY
 pygame.init()
 janela = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -29,7 +31,7 @@ def run():
             if event.type == pygame.QUIT:
                 RUN = False
 
-        movimentos()
+        movimento()
 
         janela.fill((0))
 
@@ -40,7 +42,7 @@ def run():
     pygame.quit()
 
 
-def movimentos():
+def movimento():
     global RUN
     global THAY_X
     global THAY_Y
