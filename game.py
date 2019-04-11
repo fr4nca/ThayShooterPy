@@ -14,7 +14,7 @@ PROJETIL_Y = THAY_Y + ((THAY_HEIGHT / 2) - PROJETIL_HEIGHT / 2)
 PROJETIL_VEL = 4
 PROJETIL_IS_MOVING = False
 RUN = True
-
+#MERGEEEEEE THAAAAAAY
 pygame.init()
 janela = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("ThayShooter")
