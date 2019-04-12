@@ -15,10 +15,12 @@ RUN = True
 
 # Globais
 PONTUACAO = 0
+imunidadeTimer = 0
 
 # Função para desenhos na tela
 def drawWindow(janela, ThayNave, projeteis, inimigos):
     global PONTUACAO
+    global imunidadeTimer
     global RUN
 
     fonte = pygame.font.SysFont('comicsans', 24, True)
@@ -32,22 +34,29 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
+
+    if imunidadeTimer > 0:
+        imunidadeTimer += 1
+    if imunidadeTimer > 150:
+        imunidadeTimer = 0
+        ThayNave.imune = False
     
     # Desenha inimigos
     if len(inimigos) < 8:
         inimigos.append(Inimigo(randint(WIDTH, WIDTH + 300), randint(OFFSET, HEIGHT - 60), 60, 60))
 
     for inimigo in inimigos:
-        if not ThayNave.imune: 
-            if ThayNave.vida > 0:
+        if ThayNave.vida > 0:
+            if not ThayNave.imune and imunidadeTimer == 0: 
                 if ThayNave.hitbox[1] < inimigo.hitbox[1] + inimigo.hitbox[3] and ThayNave.hitbox[1] + ThayNave.hitbox[3] > inimigo.hitbox[1]:
                         if ThayNave.hitbox[0] + ThayNave.hitbox[2] > inimigo.hitbox[0] and ThayNave.hitbox[0] < inimigo.hitbox[0] + inimigo.hitbox[2]:
                             ThayNave.hit()
-                            reset(ThayNave, inimigos)                            
-            else:
-                gameOver = fonte2.render("GAME OVER", 1, (255, 0, 0))
-                janela.blit(gameOver, (((WIDTH / 2) - (gameOver.get_width() / 2)), ((HEIGHT / 2) - (gameOver.get_height() / 2))))
-                RUN = False
+                            ThayNave.imune = True
+                            imunidadeTimer = 1
+        else:
+            gameOver = fonte2.render("GAME OVER", 1, (255, 0, 0))
+            janela.blit(gameOver, (((WIDTH / 2) - (gameOver.get_width() / 2)), ((HEIGHT / 2) - (gameOver.get_height() / 2))))
+            RUN = False
 
         if inimigo.vida > 0:
             inimigo.draw(janela)
@@ -59,16 +68,18 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
 
     # Desenha projeteis
     for projetil in projeteis:
+        projetil.draw(janela)
+
         if projetil.x > WIDTH:
             projeteis.pop(projeteis.index(projetil))
+            continue
 
-    for projetil in projeteis:
-        projetil.draw(janela)
         for inimigo in inimigos:
             if projetil.y - projetil.radius < inimigo.hitbox[1] + inimigo.hitbox[3] and projetil.y + projetil.radius > inimigo.hitbox[1]:
                 if projetil.x + projetil.radius > inimigo.hitbox[0] and projetil.x - projetil.radius < inimigo.hitbox[0] + inimigo.hitbox[2]:
                     inimigo.hit()
                     projeteis.pop(projeteis.index(projetil))
+            
 
     pygame.display.update()
 
@@ -118,13 +129,15 @@ def run():
     pygame.display.set_caption("ThayShooter")
     clock = pygame.time.Clock()
 
-    ThayNave = Thay(10, OFFSET + 10, 64, 48)
+    ThayNave = Thay(10, (HEIGHT / 2) - (48 / 2), 64, 48)
     projeteis = []
     inimigos = []
     global PONTUACAO
+    global imunidadeTimer
 
     while RUN:
         clock.tick(60)
+
         PONTUACAO += 0.1
         teclas(ThayNave, projeteis, inimigos)
         drawWindow(janela, ThayNave, projeteis, inimigos)
