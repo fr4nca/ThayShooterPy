@@ -8,18 +8,19 @@ from Projetil import Projetil
 from Thay import Thay
 
 # Constantes
-WIDTH = 800
-HEIGHT = 500
+WIDTH = 780
+HEIGHT = 510
 OFFSET = 30
 RUN = True
 
 # Globais
-PONTUACAO = 0
+pontuacao = 0
 imunidadeTimer = 0
+tiroTimer = 0
 
 # Função para desenhos na tela
 def drawWindow(janela, ThayNave, projeteis, inimigos):
-    global PONTUACAO
+    global pontuacao
     global imunidadeTimer
     global RUN
 
@@ -29,8 +30,8 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     BG = pygame.image.load(path.join('assets', 'bg.jpg'))
     janela.fill((0,0,0))
     janela.blit(BG, (0, OFFSET))
-    pontuacao = fonte.render("Pontuação: " + str(floor(PONTUACAO)), 1, (255, 255, 255))
-    janela.blit(pontuacao, (650, 10))
+    pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
+    janela.blit(pontos, (640, 10))
     
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
@@ -43,8 +44,9 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     
     # Desenha inimigos
     if len(inimigos) < 8:
-        inimigos.append(Inimigo(randint(WIDTH, WIDTH + 300), randint(OFFSET, HEIGHT - 60), 60, 60))
+        inimigos.append(Inimigo((randint(14, 20) * 60), (randint(0, 6) * 60) + OFFSET, 60, 60))
 
+    # Colisão dos inimigos com a Thay
     for inimigo in inimigos:
         if ThayNave.vida > 0:
             if not ThayNave.imune and imunidadeTimer == 0: 
@@ -63,29 +65,31 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
             if inimigo.x < 0 - inimigo.width:
                 inimigos.pop(inimigos.index(inimigo))
         else:
-            PONTUACAO += 20
+            pontuacao += 20
             inimigos.pop(inimigos.index(inimigo))
 
     # Desenha projeteis
     for projetil in projeteis:
         projetil.draw(janela)
 
-        if projetil.x > WIDTH:
+        if projetil.x > WIDTH + projetil.radius * 2:
             projeteis.pop(projeteis.index(projetil))
             continue
 
+        # Colisão do projetil com inimigo
         for inimigo in inimigos:
             if projetil.y - projetil.radius < inimigo.hitbox[1] + inimigo.hitbox[3] and projetil.y + projetil.radius > inimigo.hitbox[1]:
                 if projetil.x + projetil.radius > inimigo.hitbox[0] and projetil.x - projetil.radius < inimigo.hitbox[0] + inimigo.hitbox[2]:
                     inimigo.hit()
                     projeteis.pop(projeteis.index(projetil))
-            
+                    continue
 
     pygame.display.update()
 
 # Função de movimentos e teclas
 def teclas(ThayNave, projeteis, inimigos):
     global RUN
+    global tiroTimer
 
     keys = pygame.key.get_pressed()
 
@@ -103,13 +107,19 @@ def teclas(ThayNave, projeteis, inimigos):
     if keys[pygame.K_UP] and ThayNave.y > OFFSET + 1:
         ThayNave.y -= ThayNave.vel
 
+    if tiroTimer > 0:
+        tiroTimer += 1
+    if tiroTimer > 7:
+        tiroTimer = 0
+
     # Atira o projétil
-    if keys[pygame.K_x]:
+    if keys[pygame.K_x] and tiroTimer == 0:
         if len(projeteis) < 18:
-            if len(projeteis) > 0 and projeteis[len(projeteis) - 1].x > ThayNave.x + 70:
+            if len(projeteis) > 0:
                 projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0)))
             elif len(projeteis) == 0: 
                 projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0)))
+            tiroTimer = 1
 
     if keys[pygame.K_ESCAPE]:
         RUN = False
@@ -117,11 +127,6 @@ def teclas(ThayNave, projeteis, inimigos):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             RUN = False
-            
-def reset(ThayNave, inimigos):
-    ThayNave.x = 10
-    ThayNave.y = ((HEIGHT / 2) - (ThayNave.height / 2))
-    inimigos.clear()
 
 # Função de início
 def run():
@@ -132,13 +137,12 @@ def run():
     ThayNave = Thay(10, (HEIGHT / 2) - (48 / 2), 64, 48)
     projeteis = []
     inimigos = []
-    global PONTUACAO
-    global imunidadeTimer
+    global pontuacao
 
     while RUN:
         clock.tick(60)
 
-        PONTUACAO += 0.1
+        pontuacao += 0.1
         teclas(ThayNave, projeteis, inimigos)
         drawWindow(janela, ThayNave, projeteis, inimigos)
 
