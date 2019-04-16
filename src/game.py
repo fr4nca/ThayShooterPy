@@ -31,7 +31,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     janela.fill((0,0,0))
     janela.blit(BG, (0, OFFSET))
     pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
-    janela.blit(pontos, (640, 10))
+    janela.blit(pontos, (630, 10))
     
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
@@ -107,12 +107,12 @@ def teclas(ThayNave, projeteis, inimigos):
     if keys[pygame.K_UP] and ThayNave.y > OFFSET + 1:
         ThayNave.y -= ThayNave.vel
 
+    # Atira o projétil
     if tiroTimer > 0:
         tiroTimer += 1
     if tiroTimer > 7:
         tiroTimer = 0
 
-    # Atira o projétil
     if keys[pygame.K_x] and tiroTimer == 0:
         if len(projeteis) < 18:
             if len(projeteis) > 0:
