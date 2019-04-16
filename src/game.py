@@ -72,7 +72,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     for projetil in projeteis:
         projetil.draw(janela)
 
-        if projetil.x > WIDTH + projetil.radius * 2:
+        if projetil.x > WIDTH:
             projeteis.pop(projeteis.index(projetil))
             continue
 
@@ -110,7 +110,7 @@ def teclas(ThayNave, projeteis, inimigos):
     # Atira o projétil
     if tiroTimer > 0:
         tiroTimer += 1
-    if tiroTimer > 7:
+    if tiroTimer > 4:
         tiroTimer = 0
 
     if keys[pygame.K_x] and tiroTimer == 0:
