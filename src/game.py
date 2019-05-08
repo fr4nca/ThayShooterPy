@@ -18,6 +18,7 @@ pontuacao = 0
 imunidadeTimer = 0
 tiroTimer = 0
 
+
 # Função para desenhos na tela
 def drawWindow(janela, ThayNave, projeteis, inimigos):
     global pontuacao
@@ -27,7 +28,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     fonte = pygame.font.SysFont('comicsans', 24, True)
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
 
-    BG = pygame.image.load(path.join('assets', 'bg.jpg'))
+    BG = pygame.image.load(path.join('../assets', 'bg.jpg'))
     janela.fill((0,0,0))
     janela.blit(BG, (0, OFFSET))
     pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
@@ -68,6 +69,11 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
             pontuacao += 20
             inimigos.pop(inimigos.index(inimigo))
 
+        if inimigo.x == 0:
+            ThayNave.vida -= 10
+
+
+   
     # Desenha projeteis
     for projetil in projeteis:
         projetil.draw(janela)
@@ -81,7 +87,8 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
             if projetil.y - projetil.radius < inimigo.hitbox[1] + inimigo.hitbox[3] and projetil.y + projetil.radius > inimigo.hitbox[1]:
                 if projetil.x + projetil.radius > inimigo.hitbox[0] and projetil.x - projetil.radius < inimigo.hitbox[0] + inimigo.hitbox[2]:
                     inimigo.hit()
-                    projeteis.pop(projeteis.index(projetil))
+                    if projetil in projeteis:
+                        projeteis.pop(projeteis.index(projetil))
                     continue
 
     pygame.display.update()
@@ -95,11 +102,11 @@ def teclas(ThayNave, projeteis, inimigos):
 
     # Movimentos da Thay
     # Move pra esquerda até a margem
-    if keys[pygame.K_LEFT] and ThayNave.x > 1:
-        ThayNave.x -= ThayNave.vel
-    # Move pra direita até a margem
-    if keys[pygame.K_RIGHT] and ThayNave.x < WIDTH - ThayNave.width - 1:
-        ThayNave.x += ThayNave.vel
+    # if keys[pygame.K_LEFT] and ThayNave.x > 1:
+    #     ThayNave.x -= ThayNave.vel
+    # # Move pra direita até a margem
+    # if keys[pygame.K_RIGHT] and ThayNave.x < WIDTH - ThayNave.width - 1:
+    #     ThayNave.x += ThayNave.vel
     # Move pra baixo até a margem
     if keys[pygame.K_DOWN] and ThayNave.y < HEIGHT - ThayNave.height - 1:
         ThayNave.y += ThayNave.vel
