@@ -3,14 +3,14 @@ from pygame import image, draw, font, display
 
 # Classe da jogador
 class Thay():
-    THAY_BG = image.load(path.join('assets', 'thay1.png'))
+    THAY_BG = image.load(path.join('../assets', 'ThayShooter2.png'))
 
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-        self.vel = 3
+        self.vel = 5
         self.hitbox = (self.x, self.y, self.width, self.height)
         self.vida = 100
         self.imune = False
