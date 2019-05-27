@@ -55,21 +55,17 @@ class Menu:
             else:
                 text_quit = text_format("QUIT",OPTIONS,  60, white)
     
-            title_rect=title.get_rect()
-            start_rect=text_start.get_rect()
-            quit_rect=text_quit.get_rect()
-    
+          
             
-            janela.blit(title, (WIDTH/2 - (title_rect[2]/2), 80))
-            janela.blit(text_start, (WIDTH/2 - (start_rect[2]/2), 250))
-            janela.blit(text_quit, (WIDTH/2 - (quit_rect[2]/2), 310))
+            janela.blit(title, (WIDTH/2 - (title.get_width()/2), 80))
+            janela.blit(text_start, (WIDTH/2 - (text_start.get_width()/2), 250))
+            janela.blit(text_quit, (WIDTH/2 - (text_quit.get_width()/2), 310))
             pygame.display.update()
             pygame.display.set_caption("Menu")
 
-    def game_over(score):
+    def game_over(score, recorde, novo_recorde):
 
         selected="restart"
-        recorde = 0
         menu=True
 
         while menu:
@@ -104,14 +100,16 @@ class Menu:
             else:
                 text_quit = text_format("QUIT",  OPTIONS,60, white)
 
-            title_rect=title.get_rect()
-            pontuacao_rect=pontuacao.get_rect()
-            start_rect=text_restart.get_rect()
-            quit_rect=text_quit.get_rect()
-    
-            janela.blit(title, (WIDTH/2 - (title_rect[2]/2), 80))
-            janela.blit(pontuacao, (WIDTH/2 - (pontuacao_rect[2]/2), 180))
-            janela.blit(text_restart, (WIDTH/2 - (start_rect[2]/2), 280))
-            janela.blit(text_quit, (WIDTH/2 - (quit_rect[2]/2), 340))
+            if novo_recorde :
+                novorecorde = text_format("Novo recorde!", OPTIONS, 60, yellow)
+                janela.blit(novorecorde, (WIDTH/2 - (novorecorde.get_width()/2), 180))
+            else:
+                text_recorde = text_format('Recorde: %.0f'%recorde, OPTIONS, 60, white)
+                janela.blit(text_recorde, (WIDTH/2 - (text_recorde.get_width()/2), 180))
+
+            janela.blit(title, (WIDTH/2 - (title.get_width()/2), 80))
+            janela.blit(pontuacao, (WIDTH/2 - (pontuacao.get_width()/2), 250))
+            janela.blit(text_restart, (WIDTH/2 - (text_restart.get_width()/2), 310))
+            janela.blit(text_quit, (WIDTH/2 - (text_quit.get_width()/2), 360))
             pygame.display.update()
             pygame.display.set_caption("GameOver")
