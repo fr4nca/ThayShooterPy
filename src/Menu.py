@@ -90,7 +90,7 @@ class Menu:
             janela.blit(MENU_BG,(0, 0))
 
             title=text_format("GameOver",OPTIONS, 90, yellow)
-            pontuacao= text_format('Pontuação: %.0f'%score, OPTIONS,50, white)
+            pontuacao= text_format('Pontuação: %.0f'%score, OPTIONS,60, white)
             if selected=="restart":
                 text_restart=text_format("RESTART",  OPTIONS,60, select_color)
             else:
@@ -102,13 +102,13 @@ class Menu:
 
             if novo_recorde :
                 novorecorde = text_format("Novo recorde!", OPTIONS, 60, yellow)
-                janela.blit(novorecorde, (WIDTH/2 - (novorecorde.get_width()/2), 180))
+                janela.blit(novorecorde, (WIDTH/2 - (novorecorde.get_width()/2), 250))
             else:
-                text_recorde = text_format('Recorde: %.0f'%recorde, OPTIONS, 60, white)
-                janela.blit(text_recorde, (WIDTH/2 - (text_recorde.get_width()/2), 180))
+                text_recorde = text_format('Recorde: %.0f'%recorde, OPTIONS, 50, white)
+                janela.blit(text_recorde, (WIDTH/2 - (text_recorde.get_width()/2), 250))
 
             janela.blit(title, (WIDTH/2 - (title.get_width()/2), 80))
-            janela.blit(pontuacao, (WIDTH/2 - (pontuacao.get_width()/2), 250))
+            janela.blit(pontuacao, (WIDTH/2 - (pontuacao.get_width()/2), 180))
             janela.blit(text_restart, (WIDTH/2 - (text_restart.get_width()/2), 310))
             janela.blit(text_quit, (WIDTH/2 - (text_quit.get_width()/2), 360))
             pygame.display.update()
