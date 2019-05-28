@@ -5,7 +5,7 @@ from pygame import draw, display, image
 # Classe do inimigo
 class Inimigo():
     
-    INIMIGO_BG = image.load(path.join('../assets', 'inimigo.png'))
+    INIMIGO_BG = image.load(path.join('../assets', 'inimigos.png'))
 
     def __init__(self, x, y, width, height):
         self.x = x
