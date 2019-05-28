@@ -115,6 +115,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
 def teclas(ThayNave, projeteis, inimigos):
     global RUN
     global tiroTimer
+    global pontuacao
 
     keys = pygame.key.get_pressed()
 
@@ -147,7 +148,8 @@ def teclas(ThayNave, projeteis, inimigos):
             tiroTimer = 1
 
     if keys[pygame.K_ESCAPE]:
-        RUN = False
+        Menu.resume(ThayNave.vida, pontuacao)
+        RUN=True
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
