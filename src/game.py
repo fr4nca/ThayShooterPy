@@ -1,4 +1,5 @@
 import pygame
+from pygame import image
 from os import path
 from math import floor
 from random import randint
@@ -6,12 +7,14 @@ from random import randint
 from Inimigo import Inimigo
 from Projetil import Projetil
 from Thay import Thay
+from Menu import Menu
 
 # Constantes
 WIDTH = 780
 HEIGHT = 510
 OFFSET = 30
 RUN = True
+icon = image.load(path.join('../assets', 'inimigos.png'))
 
 # Globais
 pontuacao = 0
@@ -21,6 +24,7 @@ tiroTimer = 0
 
 # Função para desenhos na tela
 def drawWindow(janela, ThayNave, projeteis, inimigos):
+
     global pontuacao
     global imunidadeTimer
     global RUN
@@ -28,7 +32,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     fonte = pygame.font.SysFont('comicsans', 24, True)
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
 
-    BG = pygame.image.load(path.join('../assets', 'bg.jpg'))
+    BG = pygame.image.load(path.join('../assets', 'bg3.jpg'))
     janela.fill((0,0,0))
     janela.blit(BG, (0, OFFSET))
     pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
@@ -57,9 +61,9 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
                             ThayNave.imune = True
                             imunidadeTimer = 1
         else:
-            gameOver = fonte2.render("GAME OVER", 1, (255, 0, 0))
-            janela.blit(gameOver, (((WIDTH / 2) - (gameOver.get_width() / 2)), ((HEIGHT / 2) - (gameOver.get_height() / 2))))
-            RUN = False
+            Menu.game_over(pontuacao)
+            pontuacao=0
+            run()
 
         if inimigo.vida > 0:
             inimigo.draw(janela)
@@ -139,6 +143,7 @@ def teclas(ThayNave, projeteis, inimigos):
 def run():
     janela = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("ThayShooter")
+    
     clock = pygame.time.Clock()
 
     ThayNave = Thay(10, (HEIGHT / 2) - (48 / 2), 64, 48)
@@ -151,10 +156,13 @@ def run():
 
         pontuacao += 0.1
         teclas(ThayNave, projeteis, inimigos)
+        
         drawWindow(janela, ThayNave, projeteis, inimigos)
 
     pygame.quit()
 
 if __name__ == "__main__":
     pygame.init()
+    pygame.display.set_icon(icon)
+    Menu.menu_inicial()
     run()
