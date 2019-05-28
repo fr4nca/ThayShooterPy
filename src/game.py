@@ -20,7 +20,16 @@ icon = image.load(path.join('../assets', 'inimigos.png'))
 pontuacao = 0
 imunidadeTimer = 0
 tiroTimer = 0
+recorde = 0
 
+
+def novo_recorde():
+    global pontuacao
+    global recorde
+    
+    if pontuacao > recorde :
+        return True
+    return False
 
 # Função para desenhos na tela
 def drawWindow(janela, ThayNave, projeteis, inimigos):
@@ -28,6 +37,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     global pontuacao
     global imunidadeTimer
     global RUN
+    global recorde
 
     fonte = pygame.font.SysFont('comicsans', 24, True)
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
@@ -61,8 +71,12 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
                             ThayNave.imune = True
                             imunidadeTimer = 1
         else:
-            Menu.game_over(pontuacao)
-            pontuacao=0
+            if novo_recorde(): 
+                recorde = pontuacao
+                Menu.game_over(pontuacao, recorde, True)
+            else:
+                Menu.game_over(pontuacao, recorde, False)
+            pontuacao = 0
             run()
 
         if inimigo.vida > 0:
@@ -150,6 +164,7 @@ def run():
     projeteis = []
     inimigos = []
     global pontuacao
+    global recorde
 
     while RUN:
         clock.tick(60)
