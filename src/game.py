@@ -16,7 +16,6 @@ HEIGHT = 510
 OFFSET = 50
 RUN = True
 icon = image.load(path.join('../assets', 'inimigos.png'))
-rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
 
 
 # Globais
@@ -25,14 +24,12 @@ imunidadeTimer = 0
 tiroTimer = 0
 recorde = 0
 isEspecial1 = False
-
 especial1Timer = 0
 isEspecial2 = False
 especial2Timer = 0
 isEspecial3 = False
 especial3Timer = 0
 rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
-
 
 def novo_recorde():
     global pontuacao
@@ -58,11 +55,10 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     BG = pygame.image.load(path.join('../assets', 'bg3.jpg'))
     janela.fill((0,0,0))
     janela.blit(BG, (0, OFFSET))
-    pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))7
-    
+    pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
     janela.blit(pontos, (630, 10))
     janela.blit(rodolfo, (280,4))
-    rodolfo
+    
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
 
