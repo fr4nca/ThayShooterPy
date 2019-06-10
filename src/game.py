@@ -160,24 +160,23 @@ def teclas(ThayNave, projeteis, inimigos):
 
     if especial1Timer > 0:
         especial1Timer += 1
-    if especial1Timer > 300:
+    if especial1Timer > 250:
         especial1Timer = 0
         isEspecial1 = False
 
     if especial2Timer > 0:
         especial2Timer += 1
-    if especial2Timer > 300:
+    if especial2Timer > 250:
         especial2Timer = 0
         isEspecial2 = False
         ThayNave.especial2(isEspecial2)
 
     if especial3Timer > 0:
         especial3Timer += 1
-    if especial3Timer > 300:
+    if especial3Timer > 250:
         especial3Timer = 0
         isEspecial3 = False
         ThayNave.especial3(isEspecial3)
-
 
     if keys[pygame.K_a]:
         isEspecial1 = True
