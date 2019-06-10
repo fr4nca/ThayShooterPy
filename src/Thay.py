@@ -21,9 +21,9 @@ class Thay():
         janela.blit(self.THAY_BG, (self.x, self.y))
         self.hitbox = (self.x, self.y, self.width, self.height)
         vida = fonte.render("HP: ", 1, (255, 255, 255))
-        janela.blit(vida, (5, 10))
-        draw.rect(janela, (255, 0, 0), (45, 5, 200, 21))
-        draw.rect(janela, (0, 255, 0), (45, 5, 200 - ((200/100) * (100 - self.vida)), 21))
+        janela.blit(vida, (5, 17))
+        draw.rect(janela, (255, 0, 0), (45, 15, 200, 21))
+        draw.rect(janela, (0, 255, 0), (45, 15, 200 - ((200/100) * (100 - self.vida)), 21))
         display.update()
 
     def hit(self):

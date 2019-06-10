@@ -12,7 +12,7 @@ from Menu import Menu
 # Constantes
 WIDTH = 780
 HEIGHT = 510
-OFFSET = 30
+OFFSET = 50
 RUN = True
 icon = image.load(path.join('../assets', 'inimigos.png'))
 
@@ -48,7 +48,9 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     janela.fill((0,0,0))
     janela.blit(BG, (0, OFFSET))
     pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
+    rodolfo = pygame.image.load(path.join('../assets', 'Rodolfo.png'))
     janela.blit(pontos, (630, 10))
+    janela.blit(rodolfo, (280,4))
     
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
