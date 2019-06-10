@@ -22,6 +22,7 @@ imunidadeTimer = 0
 tiroTimer = 0
 recorde = 0
 isEspecial1 = False
+rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_inativo.png'))
 
 
 def novo_recorde():
@@ -40,6 +41,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     global RUN
     global recorde
     global isEspecial1
+    global rodolfo
 
     fonte = pygame.font.SysFont('comicsans', 24, True)
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
@@ -48,7 +50,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     janela.fill((0,0,0))
     janela.blit(BG, (0, OFFSET))
     pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
-    rodolfo = pygame.image.load(path.join('../assets', 'Rodolfo.png'))
+    
     janela.blit(pontos, (630, 10))
     janela.blit(rodolfo, (280,4))
     
@@ -94,8 +96,11 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         if inimigo.x == 0:
             ThayNave.vida -= 5
 
-    if pontuacao > 100:
-        isEspecial1 = True
+    if pontuacao > 40:
+        rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_ativo.png'))
+
+
+    
 
     # Desenha projeteis
     for projetil in projeteis:
