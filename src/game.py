@@ -15,6 +15,7 @@ HEIGHT = 510
 OFFSET = 50
 RUN = True
 icon = image.load(path.join('../assets', 'inimigos.png'))
+rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
 
 # Globais
 pontuacao = 0
@@ -22,15 +23,13 @@ imunidadeTimer = 0
 tiroTimer = 0
 recorde = 0
 isEspecial1 = False
-<<<<<<< HEAD
 
-=======
 especial1Timer = 0
 isEspecial2 = False
 especial2Timer = 0
 isEspecial3 = False
 especial3Timer = 0
->>>>>>> 461da15a8f66dfbe034ad5ee504844266e71552d
+
 
 def novo_recorde():
     global pontuacao
@@ -60,7 +59,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     
     janela.blit(pontos, (630, 10))
     janela.blit(rodolfo, (280,4))
-    
+    rodolfo
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
 
@@ -103,13 +102,6 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         if inimigo.x == 0 and not isEspecial3:
             ThayNave.vida -= 5
 
-<<<
-
-
-    
-
-=======
->>>>>>> 461da15a8f66dfbe034ad5ee504844266e71552d
     # Desenha projeteis
     for projetil in projeteis:
         projetil.draw(janela)
