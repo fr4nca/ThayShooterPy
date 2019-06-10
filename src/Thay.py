@@ -37,4 +37,8 @@ class Thay():
 
     def especial3(self, isEspecial):
         self.isEspecial3 = isEspecial
+
         self.imune = False if not self.isEspecial3 else True
+
+        self.imune = False if not self.isEspecial3 else True
+

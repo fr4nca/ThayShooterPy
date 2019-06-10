@@ -1,6 +1,6 @@
 # ThayShooter
 
-##O que é
+## O que é
 
 Um jogo onde uma estudante deve sobreviver a todas suas tarefas, trabalhos e provas, destruindo-as para ganhar pontos ou somente desviar.
 
