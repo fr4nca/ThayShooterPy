@@ -88,7 +88,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
             inimigos.pop(inimigos.index(inimigo))
 
         if inimigo.x == 0:
-            ThayNave.vida -= 10
+            pontuacao -= 30
 
 
    

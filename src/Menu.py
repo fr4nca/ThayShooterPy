@@ -74,9 +74,6 @@ class Menu:
 
     def game_over(score, recorde, novo_recorde):
 
-        
-
-
         selected="restart"
         menu=True
 
