@@ -21,6 +21,7 @@ pontuacao = 0
 imunidadeTimer = 0
 tiroTimer = 0
 recorde = 0
+isEspecial1 = False
 
 
 def novo_recorde():
@@ -38,6 +39,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     global imunidadeTimer
     global RUN
     global recorde
+    global isEspecial1
 
     fonte = pygame.font.SysFont('comicsans', 24, True)
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
@@ -59,7 +61,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     
     # Desenha inimigos
     if len(inimigos) < 8:
-        inimigos.append(Inimigo((randint(14, 20) * 60), (randint(0, 6) * 60) + OFFSET, 60, 60))
+        inimigos.append(Inimigo((randint(14, 20) * 60), (randint(0, 6) * 60) + OFFSET, 60, 60, isEspecial1))
 
     # Colisão dos inimigos com a Thay
     for inimigo in inimigos:
@@ -88,10 +90,11 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
             inimigos.pop(inimigos.index(inimigo))
 
         if inimigo.x == 0:
-            pontuacao -= 30
+            ThayNave.vida -= 5
 
+    if pontuacao > 100:
+        isEspecial1 = True
 
-   
     # Desenha projeteis
     for projetil in projeteis:
         projetil.draw(janela)
@@ -104,11 +107,10 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         for inimigo in inimigos:
             if projetil.y - projetil.radius < inimigo.hitbox[1] + inimigo.hitbox[3] and projetil.y + projetil.radius > inimigo.hitbox[1]:
                 if projetil.x + projetil.radius > inimigo.hitbox[0] and projetil.x - projetil.radius < inimigo.hitbox[0] + inimigo.hitbox[2]:
-                    inimigo.hit()
+                    inimigo.hit(projetil.dano)
                     if projetil in projeteis:
                         projeteis.pop(projeteis.index(projetil))
                     continue
-
     pygame.display.update()
 
 # Função de movimentos e teclas
@@ -116,6 +118,7 @@ def teclas(ThayNave, projeteis, inimigos):
     global RUN
     global tiroTimer
     global pontuacao
+    global isEspecial1
 
     keys = pygame.key.get_pressed()
 
@@ -142,9 +145,9 @@ def teclas(ThayNave, projeteis, inimigos):
     if keys[pygame.K_x] and tiroTimer == 0:
         if len(projeteis) < 18:
             if len(projeteis) > 0:
-                projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0)))
+                projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0), isEspecial1))
             elif len(projeteis) == 0: 
-                projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0)))
+                projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0), isEspecial1))
             tiroTimer = 1
 
     if keys[pygame.K_ESCAPE]:

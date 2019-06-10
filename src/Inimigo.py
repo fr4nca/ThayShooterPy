@@ -7,7 +7,7 @@ class Inimigo():
     
     INIMIGO_BG = image.load(path.join('../assets', 'inimigos.png'))
 
-    def __init__(self, x, y, width, height):
+    def __init__(self, x, y, width, height, isEspecial1):
         self.x = x
         self.y = y
         self.width = width
@@ -15,6 +15,7 @@ class Inimigo():
         self.vel = -3
         self.hitbox = (self.x, self.y, self.width, self.height)
         self.vida = 100
+        self.isEspecial1 = isEspecial1
     
     def draw(self, janela):
         self.move()
@@ -26,6 +27,6 @@ class Inimigo():
     def move(self):
         self.x += self.vel
 
-    def hit(self):
+    def hit(self, dano):
         if self.vida > 0:
-            self.vida -= 34
+            self.vida -= dano
