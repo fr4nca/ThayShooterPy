@@ -23,13 +23,24 @@ pontuacao = 0
 imunidadeTimer = 0
 tiroTimer = 0
 recorde = 0
+
 isEspecial1 = False
 especial1Timer = 0
+especial1Enabled = False
+especial1Pontuacao = 0
+rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
+
 isEspecial2 = False
 especial2Timer = 0
+especial2Enabled = False
+especial2Pontuacao = 0
+# rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
+
 isEspecial3 = False
 especial3Timer = 0
-rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
+especial3Enabled = False
+especial3Pontuacao = 0
+# rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
 
 def novo_recorde():
     global pontuacao
@@ -46,8 +57,19 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     global imunidadeTimer
     global RUN
     global recorde
+    
     global isEspecial1
+    global especial1Enabled
+    global especial1Pontuacao
     global rodolfo
+
+    global especial2Enabled
+    global especial2Pontuacao
+    # global rodolfo
+
+    global especial3Enabled
+    global especial3Pontuacao
+    # global rodolfo
 
     fonte = pygame.font.SysFont('comicsans', 24, True)
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
@@ -117,6 +139,40 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
                     if projetil in projeteis:
                         projeteis.pop(projeteis.index(projetil))
                     continue
+
+
+    if especial1Pontuacao > 1000: 
+        especial1Enabled = True
+        
+    if especial1Enabled:
+        rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_ativo.png'))
+    else: 
+        rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_inativo.png'))
+
+    especial1Pontuacao += 1
+
+
+    if especial2Pontuacao > 2000: 
+        especial2Enabled = True
+        
+    # if especial2Enabled:
+    #     rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_ativo.png'))
+    # else: 
+    #     rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_inativo.png'))
+
+    especial2Pontuacao += 1
+
+
+    if especial3Pontuacao > 3000: 
+        especial3Enabled = True
+        
+    # if especial3Enabled:
+    #     rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_ativo.png'))
+    # else: 
+    #     rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_inativo.png'))
+
+    especial3Pontuacao += 1
+
     pygame.display.update()
 
 # Função de movimentos e teclas
@@ -124,13 +180,25 @@ def teclas(ThayNave, projeteis, inimigos):
     global RUN
     global tiroTimer
     global pontuacao
+
     global isEspecial1
     global especial1Timer
+    global especial1Enabled
+    global especial1Pontuacao
+    global rodolfo
+
     global isEspecial2
     global especial2Timer
+    global especial2Enabled
+    global especial2Pontuacao
+    # global rodolfo
+
     global isEspecial3
     global especial3Timer
-    global rodolfo
+    global especial3Enabled
+    global especial3Pontuacao
+    # global rodolfo
+
 
     keys = pygame.key.get_pressed()
 
@@ -167,12 +235,16 @@ def teclas(ThayNave, projeteis, inimigos):
     if especial1Timer > 250:
         especial1Timer = 0
         isEspecial1 = False
+        especial1Enabled = False
+        especial1Pontuacao = 0
 
     if especial2Timer > 0:
         especial2Timer += 1
     if especial2Timer > 250:
         especial2Timer = 0
         isEspecial2 = False
+        especial2Enabled = False
+        especial2Pontuacao = 0
         ThayNave.especial2(isEspecial2)
 
     if especial3Timer > 0:
@@ -180,17 +252,20 @@ def teclas(ThayNave, projeteis, inimigos):
     if especial3Timer > 250:
         especial3Timer = 0
         isEspecial3 = False
+        especial3Enabled = False
+        especial3Pontuacao = 0
         ThayNave.especial3(isEspecial3)
 
-    if keys[pygame.K_a]:
+    if keys[pygame.K_a] and especial1Enabled:
         isEspecial1 = True
         especial1Timer = 1
-        rodolfo = image.load(path.join('../assets', 'rodolfo_ativo.png'))
-    if keys[pygame.K_s]:
+
+    if keys[pygame.K_s] and especial2Enabled:
         isEspecial2 = True  
         ThayNave.especial2(isEspecial2)
         especial2Timer = 1
-    if keys[pygame.K_d]:
+
+    if keys[pygame.K_d] and especial3Enabled:
         isEspecial3 = True
         ThayNave.especial3(isEspecial3)
         especial3Timer = 1
