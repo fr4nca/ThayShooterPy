@@ -22,8 +22,15 @@ imunidadeTimer = 0
 tiroTimer = 0
 recorde = 0
 isEspecial1 = False
-rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_inativo.png'))
+<<<<<<< HEAD
 
+=======
+especial1Timer = 0
+isEspecial2 = False
+especial2Timer = 0
+isEspecial3 = False
+especial3Timer = 0
+>>>>>>> 461da15a8f66dfbe034ad5ee504844266e71552d
 
 def novo_recorde():
     global pontuacao
@@ -93,15 +100,16 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
             pontuacao += 20
             inimigos.pop(inimigos.index(inimigo))
 
-        if inimigo.x == 0:
+        if inimigo.x == 0 and not isEspecial3:
             ThayNave.vida -= 5
 
-    if pontuacao > 40:
-        rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_ativo.png'))
+<<<
 
 
     
 
+=======
+>>>>>>> 461da15a8f66dfbe034ad5ee504844266e71552d
     # Desenha projeteis
     for projetil in projeteis:
         projetil.draw(janela)
@@ -126,6 +134,11 @@ def teclas(ThayNave, projeteis, inimigos):
     global tiroTimer
     global pontuacao
     global isEspecial1
+    global especial1Timer
+    global isEspecial2
+    global especial2Timer
+    global isEspecial3
+    global especial3Timer
 
     keys = pygame.key.get_pressed()
 
@@ -157,6 +170,38 @@ def teclas(ThayNave, projeteis, inimigos):
                 projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0), isEspecial1))
             tiroTimer = 1
 
+    if especial1Timer > 0:
+        especial1Timer += 1
+    if especial1Timer > 250:
+        especial1Timer = 0
+        isEspecial1 = False
+
+    if especial2Timer > 0:
+        especial2Timer += 1
+    if especial2Timer > 250:
+        especial2Timer = 0
+        isEspecial2 = False
+        ThayNave.especial2(isEspecial2)
+
+    if especial3Timer > 0:
+        especial3Timer += 1
+    if especial3Timer > 250:
+        especial3Timer = 0
+        isEspecial3 = False
+        ThayNave.especial3(isEspecial3)
+
+    if keys[pygame.K_a]:
+        isEspecial1 = True
+        especial1Timer = 1
+    if keys[pygame.K_s]:
+        isEspecial2 = True  
+        ThayNave.especial2(isEspecial2)
+        especial2Timer = 1
+    if keys[pygame.K_d]:
+        isEspecial3 = True
+        ThayNave.especial3(isEspecial3)
+        especial3Timer = 1
+
     if keys[pygame.K_ESCAPE]:
         Menu.resume(ThayNave.vida, pontuacao)
         RUN=True
@@ -167,16 +212,19 @@ def teclas(ThayNave, projeteis, inimigos):
 
 # Função de início
 def run():
+    global isEspecial2
+    global isEspecial3
+    global pontuacao
+    global recorde
+
     janela = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("ThayShooter")
     
     clock = pygame.time.Clock()
 
-    ThayNave = Thay(10, (HEIGHT / 2) - (48 / 2), 64, 48)
+    ThayNave = Thay(10, (HEIGHT / 2) - (48 / 2), 64, 48, isEspecial2, isEspecial3)
     projeteis = []
     inimigos = []
-    global pontuacao
-    global recorde
 
     while RUN:
         clock.tick(60)
