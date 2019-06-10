@@ -58,11 +58,8 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     BG = pygame.image.load(path.join('../assets', 'bg3.jpg'))
     janela.fill((0,0,0))
     janela.blit(BG, (0, OFFSET))
-    pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
-<<<<<<< HEAD
+    pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))7
     
-=======
->>>>>>> 5df3c18b7d4ceae7f1329d1249947ef5971cd7b9
     janela.blit(pontos, (630, 10))
     janela.blit(rodolfo, (280,4))
     rodolfo
