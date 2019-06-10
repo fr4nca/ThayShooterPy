@@ -7,10 +7,10 @@ class Projetil():
     def __init__(self, x, y, radius, color, isEspecial1):
         self.x = x
         self.y = y
-        self.radius = radius
         self.color = color
         self.vel = 6
         self.isEspecial1 = isEspecial1
+        self.radius = radius if not self.isEspecial1 else radius * 3
         self.projetil_bg = image.load(path.join('../assets', 'projetao.png' if self.isEspecial1 else 'projetil.png'))
         self.dano = 34 if not self.isEspecial1 else 100
 
