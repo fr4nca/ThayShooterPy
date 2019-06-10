@@ -1,3 +1,4 @@
+
 import pygame
 from pygame import image
 from os import path
@@ -17,6 +18,7 @@ RUN = True
 icon = image.load(path.join('../assets', 'inimigos.png'))
 rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
 
+
 # Globais
 pontuacao = 0
 imunidadeTimer = 0
@@ -29,6 +31,7 @@ isEspecial2 = False
 especial2Timer = 0
 isEspecial3 = False
 especial3Timer = 0
+rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
 
 
 def novo_recorde():
@@ -56,7 +59,10 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     janela.fill((0,0,0))
     janela.blit(BG, (0, OFFSET))
     pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
+<<<<<<< HEAD
     
+=======
+>>>>>>> 5df3c18b7d4ceae7f1329d1249947ef5971cd7b9
     janela.blit(pontos, (630, 10))
     janela.blit(rodolfo, (280,4))
     rodolfo
@@ -131,6 +137,7 @@ def teclas(ThayNave, projeteis, inimigos):
     global especial2Timer
     global isEspecial3
     global especial3Timer
+    global rodolfo
 
     keys = pygame.key.get_pressed()
 
@@ -185,6 +192,7 @@ def teclas(ThayNave, projeteis, inimigos):
     if keys[pygame.K_a]:
         isEspecial1 = True
         especial1Timer = 1
+        rodolfo = image.load(path.join('../assets', 'rodolfo_ativo.png'))
     if keys[pygame.K_s]:
         isEspecial2 = True  
         ThayNave.especial2(isEspecial2)
