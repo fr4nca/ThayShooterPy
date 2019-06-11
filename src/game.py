@@ -19,7 +19,7 @@ icon = image.load(path.join('../assets', 'inimigos.png'))
 bgs = [pygame.image.load(path.join('../assets', 'bg3.jpg')), pygame.image.load(path.join('../assets', 'bg.jpg'))]
 BG = bgs[0]
 # THAY TROCAR PRA IMAGEM CERTA
-preto = image.load(path.join('../assets', 'preto.jpg'))
+preto = image.load(path.join('../assets', 'preto.png'))
 
 # Globais
 pontuacao = 0
@@ -51,11 +51,16 @@ especial3Pontuacao = 0
 chiquinhoImgs = [image.load(path.join('../assets', 'chiquinho_ativo.png')), image.load(path.join('../assets', 'chiquinho_inativo.png'))]
 chiquinho = chiquinhoImgs[1]
 
+
+inimigosImgs = [image.load(path.join('../assets', 'vazio.png')), image.load(path.join('../assets', 'rubia.png')), image.load(path.join('../assets', 'oswaldo.png'))]
+especialinimigo = inimigosImgs[0]
+
 # Rubia - troca os controles
 isEspecialInimigo1 = False
 especialInimigo1Timer = 0
 especialInimigo1Enable = False
 especialInimigo1Pontuacao = 0
+
 
 # Oswaldo - diminui visão do mapa
 isEspecialInimigo2 = False
@@ -177,6 +182,8 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     global chiquinho
     global chiquinhoImgs
 
+    global especialinimigo
+
     global isEspecialInimigo1
     global especialInimigo1Pontuacao
     global especialInimigo1Enable
@@ -200,6 +207,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     janela.blit(rodolfo, (280,4))
     janela.blit(barbosa, (330, 4))
     janela.blit(chiquinho, (380, 4))
+    janela.blit(especialinimigo, (520, 4))
     
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
@@ -298,6 +306,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     # Rubia
     if especialInimigo1Pontuacao > 650:
         isEspecialInimigo1 = True
+        especialinimigo = inimigosImgs[1]
         especialInimigo1Enable = True
 
     especialInimigo1Pontuacao += 1
@@ -305,6 +314,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     # Oswaldo
     if especialInimigo2Pontuacao > 1000: 
         isEspecialInimigo2 = True
+        especialinimigo = inimigosImgs[2]
         especialInimigo2Enable = True
 
     especialInimigo2Pontuacao += 1
@@ -314,6 +324,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         especialInimigo2Timer += 1
     if especialInimigo2Timer > 300:
         isEspecialInimigo2 = False
+        especialinimigo = inimigosImgs[0]
         especialInimigo2Pontuacao = 0
         especialInimigo2Timer = 0
         
@@ -321,7 +332,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         especialInimigo2Timer = 1
 
     if isEspecialInimigo2:
-        janela.blit(preto, (250, OFFSET))
+        janela.blit(preto, (0, OFFSET))
 
     pygame.display.update()
 
@@ -351,6 +362,8 @@ def teclas(ThayNave, projeteis, inimigos):
     global especialInimigo1Pontuacao
     global especialInimigo1Enable
 
+    global especialinimigo
+
     keys = pygame.key.get_pressed()
 
     # Movimentos da Thay
@@ -372,6 +385,7 @@ def teclas(ThayNave, projeteis, inimigos):
         especialInimigo1Timer += 1
     if especialInimigo1Timer > 250:
         isEspecialInimigo1 = False
+        especialinimigo = inimigosImgs[0]
         especialInimigo1Pontuacao = 0
         especialInimigo1Timer = 0
         
