@@ -18,6 +18,7 @@ RUN = True
 icon = image.load(path.join('../assets', 'inimigos.png'))
 bgs = [pygame.image.load(path.join('../assets', 'bg3.jpg')), pygame.image.load(path.join('../assets', 'bg.jpg'))]
 BG = bgs[0]
+# THAY TROCAR PRA IMAGEM CERTA
 preto = image.load(path.join('../assets', 'preto.jpg'))
 
 # Globais
@@ -294,25 +295,24 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     especial3Pontuacao += 1
 
     # Especiais inimigos
-
     # Rubia
-    if especialInimigo1Pontuacao > 500:
+    if especialInimigo1Pontuacao > 650:
         isEspecialInimigo1 = True
         especialInimigo1Enable = True
 
     especialInimigo1Pontuacao += 1
 
     # Oswaldo
-    if especialInimigo2Pontuacao > 200: 
+    if especialInimigo2Pontuacao > 1000: 
         isEspecialInimigo2 = True
-        especialInimigo2Enable = True    
+        especialInimigo2Enable = True
 
     especialInimigo2Pontuacao += 1
 
     if especialInimigo2Timer > 0:
         especialInimigo2Enable = False
         especialInimigo2Timer += 1
-    if especialInimigo2Timer > 250:
+    if especialInimigo2Timer > 300:
         isEspecialInimigo2 = False
         especialInimigo2Pontuacao = 0
         especialInimigo2Timer = 0
@@ -322,9 +322,6 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
 
     if isEspecialInimigo2:
         janela.blit(preto, (200, OFFSET))
-        #colcoar coisa preta transparente pra atrapalhar visãop
-        print("alecrim")
-    
 
     pygame.display.update()
 
@@ -357,9 +354,6 @@ def teclas(ThayNave, projeteis, inimigos):
     keys = pygame.key.get_pressed()
 
     # Movimentos da Thay
-
-    
-    
     if not isEspecialInimigo1:
         if keys[pygame.K_DOWN] and ThayNave.y < HEIGHT - ThayNave.height - 1:
             ThayNave.y += ThayNave.vel
