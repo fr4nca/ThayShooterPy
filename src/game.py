@@ -332,7 +332,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         especialInimigo2Timer = 1
 
     if isEspecialInimigo2:
-        janela.blit(preto, (0, OFFSET))
+        janela.blit(preto, (150, OFFSET))
 
     pygame.display.update()
 
