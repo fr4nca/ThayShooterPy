@@ -68,8 +68,8 @@ class Menu:
             janela_blit(janela, text_start, 250)
             janela_blit(janela, text_quit, 310)
             
-            pygame.display.update()
             pygame.display.set_caption("Menu")
+            pygame.display.update()
 
     def game_over(score, recorde, novo_recorde):
 

@@ -25,7 +25,6 @@ class Inimigo():
         janela.blit(self.INIMIGO_BG, (self.x, self.y))
         #draw.rect(janela, (255, 0, 0), (self.x, self.y, self.width, self.height))
         self.hitbox = (self.x, self.y, self.width, self.height)
-        display.update()
     
     def move(self):
         self.x += self.vel
