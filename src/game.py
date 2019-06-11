@@ -18,6 +18,7 @@ RUN = True
 icon = image.load(path.join('../assets', 'inimigos.png'))
 bgs = [pygame.image.load(path.join('../assets', 'bg3.jpg')), pygame.image.load(path.join('../assets', 'bg.jpg'))]
 BG = bgs[0]
+preto = image.load(path.join('../assets', 'preto.jpg'))
 
 # Globais
 pontuacao = 0
@@ -66,6 +67,81 @@ isEspecialInimigo3 = False
 especialInimigo3Enable = False
 especialInimigo3Timer = 0
 especialInimigo3Pontuacao = 0
+
+def reset():
+    global isEspecial1
+    global isEspecial2
+    global isEspecial3
+
+    global especial1Enabled
+    global especial2Enabled
+    global especial3Enabled
+
+    global especial1Timer
+    global especial2Timer
+    global especial3Timer
+
+    global especial1Pontuacao
+    global especial2Pontuacao
+    global especial3Pontuacao
+
+    global rodolfo
+    global barbosa
+    global chiquinho
+
+    global isEspecialInimigo1
+    global especialInimigo1Timer
+    global especialInimigo1Enable 
+    global especialInimigo1Pontuacao
+
+    global isEspecialInimigo2
+    global especialInimigo2Timer
+    global especialInimigo2Enable 
+    global especialInimigo2Pontuacao
+
+    global isEspecialInimigo3
+    global especialInimigo3Timer
+    global especialInimigo3Enable 
+    global especialInimigo3Pontuacao
+
+    # Rodolfo - Tiros mais fortes
+    isEspecial1 = False
+    especial1Timer = 0
+    especial1Enabled = False
+    especial1Pontuacao = 0
+    rodolfo = rodolfoImgs[1]
+
+    # Barbosa - movimentação mais rápida
+    isEspecial2 = False
+    especial2Timer = 0
+    especial2Enabled = False
+    especial2Pontuacao = 0
+    barbosa = barbosaImgs[1]
+
+    # Chiquinho - imunidade
+    isEspecial3 = False
+    especial3Timer = 0
+    especial3Enabled = False
+    especial3Pontuacao = 0
+    chiquinho = chiquinhoImgs[1]
+
+    # Rubia - troca os controles
+    isEspecialInimigo1 = False
+    especialInimigo1Timer = 0
+    especialInimigo1Enable = False
+    especialInimigo1Pontuacao = 0
+
+    # Oswaldo - diminui visão do mapa
+    isEspecialInimigo2 = False
+    especialInimigo2Timer = 0
+    especialInimigo2Enable = False
+    especialInimigo2Pontuacao = 0
+
+    # Osmar - ainda não sei kkk
+    isEspecialInimigo3 = False
+    especialInimigo3Enable = False
+    especialInimigo3Timer = 0
+    especialInimigo3Pontuacao = 0
 
 def novo_recorde():
     global pontuacao
@@ -117,7 +193,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
 
     janela.fill((0,0,0))
-    janela.blit(BG, (0, OFFSET))
+    janela.blit(BG, (0, OFFSET)) 
     pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
     janela.blit(pontos, (630, 10))
     janela.blit(rodolfo, (280,4))
@@ -153,6 +229,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
             else:
                 Menu.game_over(pontuacao, recorde, False)
             pontuacao = 0
+            reset()
             run()
 
         if inimigo.vida > 0:
@@ -226,7 +303,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     especialInimigo1Pontuacao += 1
 
     # Oswaldo
-    if especialInimigo2Pontuacao > 1000: 
+    if especialInimigo2Pontuacao > 200: 
         isEspecialInimigo2 = True
         especialInimigo2Enable = True    
 
@@ -244,13 +321,10 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         especialInimigo2Timer = 1
 
     if isEspecialInimigo2:
+        janela.blit(preto, (200, OFFSET))
         #colcoar coisa preta transparente pra atrapalhar visãop
         print("alecrim")
-    else: 
-        #tirar coisa preta transparente pra atrapalhar visãop
-        print("cahtu")
-
-        
+    
 
     pygame.display.update()
 
