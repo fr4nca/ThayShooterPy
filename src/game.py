@@ -245,10 +245,9 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
 
     if isEspecialInimigo2:
         #colcoar coisa preta transparente pra atrapalhar visãop
-        BG = bgs[1]
         print("alecrim")
     else: 
-        BG = bgs[0]
+        #tirar coisa preta transparente pra atrapalhar visãop
         print("cahtu")
 
         
