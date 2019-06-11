@@ -12,7 +12,7 @@ class Inimigo():
         self.y = y
         self.width = width
         self.height = height
-        self.vel = -3
+        self.vel = -2
         self.hitbox = (self.x, self.y, self.width, self.height)
         self.vida = 100
         self.isEspecial1 = isEspecial1
