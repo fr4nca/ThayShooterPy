@@ -63,8 +63,7 @@ class Menu:
                 text_quit=text_format("QUIT",  OPTIONS,60, yellow)
             else:
                 text_quit = text_format("QUIT",OPTIONS,  60, white)
-    
-          
+                
             janela_blit(janela, title, 80)
             janela_blit(janela, text_start, 250)
             janela_blit(janela, text_quit, 310)

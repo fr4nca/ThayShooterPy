@@ -17,6 +17,7 @@ OFFSET = 50
 RUN = True
 icon = image.load(path.join('../assets', 'inimigos.png'))
 bgs = [pygame.image.load(path.join('../assets', 'bg3.jpg')), pygame.image.load(path.join('../assets', 'bg.jpg'))]
+BG = bgs[0]
 
 # Globais
 pontuacao = 0
@@ -81,6 +82,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     global RUN
     global recorde
     global bgs
+    global BG
     
     global isEspecial1
     global especial1Enabled
@@ -114,7 +116,6 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     fonte = pygame.font.SysFont('comicsans', 24, True)
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
 
-    BG = bgs[0]
     janela.fill((0,0,0))
     janela.blit(BG, (0, OFFSET))
     pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
@@ -244,9 +245,10 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
 
     if isEspecialInimigo2:
         #colcoar coisa preta transparente pra atrapalhar visãop
+        BG = bgs[1]
         print("alecrim")
     else: 
-        #tirar coisa preta transparente pra atrapalhar visãop
+        BG = bgs[0]
         print("cahtu")
 
         
