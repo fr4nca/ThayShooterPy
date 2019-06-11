@@ -212,7 +212,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     
     # Desenha inimigos
     if len(inimigos) < 8:
-        inimigos.append(Inimigo((randint(14, 20) * 60), (randint(0, 6) * 60) + OFFSET, 60, 60, isEspecial1))
+        inimigos.append(Inimigo((randint(14, 20) * 60), (randint(0, 6) * 60) + OFFSET, 60, 60, isEspecial1, randint(0,3)))
 
     # Colisão dos inimigos com a Thay
     for inimigo in inimigos:
