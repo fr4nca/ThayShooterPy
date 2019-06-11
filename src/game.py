@@ -34,13 +34,13 @@ isEspecial2 = False
 especial2Timer = 0
 especial2Enabled = False
 especial2Pontuacao = 0
-# rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
+barbosa = image.load(path.join('../assets', 'barbosa_inativo.png'))
 
 isEspecial3 = False
 especial3Timer = 0
 especial3Enabled = False
 especial3Pontuacao = 0
-# rodolfo = image.load(path.join('../assets', 'rodolfo_inativo.png'))
+chiquinho = image.load(path.join('../assets', 'chiquinho_inativo.png'))
 
 def novo_recorde():
     global pontuacao
@@ -65,11 +65,11 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
 
     global especial2Enabled
     global especial2Pontuacao
-    # global rodolfo
+    global barbosa
 
     global especial3Enabled
     global especial3Pontuacao
-    # global rodolfo
+    global chiquinho
 
     fonte = pygame.font.SysFont('comicsans', 24, True)
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
@@ -80,6 +80,8 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
     janela.blit(pontos, (630, 10))
     janela.blit(rodolfo, (280,4))
+    janela.blit(barbosa, (330, 4))
+    janela.blit(chiquinho, (380, 4))
     
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
@@ -154,11 +156,11 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
 
     if especial2Pontuacao > 2000: 
         especial2Enabled = True
-        
-    # if especial2Enabled:
-    #     rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_ativo.png'))
-    # else: 
-    #     rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_inativo.png'))
+        rodolfo
+    if especial2Enabled:
+        barbosa = pygame.image.load(path.join('../assets', 'barbosa_ativo.png'))
+    else: 
+        barbosa = pygame.image.load(path.join('../assets', 'barbosa_inativo.png'))
 
     especial2Pontuacao += 1
 
@@ -166,10 +168,10 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     if especial3Pontuacao > 3000: 
         especial3Enabled = True
         
-    # if especial3Enabled:
-    #     rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_ativo.png'))
-    # else: 
-    #     rodolfo = pygame.image.load(path.join('../assets', 'rodolfo_inativo.png'))
+    if especial3Enabled:
+        chiquinho = pygame.image.load(path.join('../assets', 'chiquinho_ativo.png'))
+    else: 
+        chiquinho = pygame.image.load(path.join('../assets', 'chiquinho_inativo.png'))
 
     especial3Pontuacao += 1
 
