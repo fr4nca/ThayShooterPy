@@ -1,13 +1,13 @@
 from random import randint
 from os import path
 from pygame import draw, display, image
+import random
 
 # Classe do inimigo
 class Inimigo():
-    
-    INIMIGO_BG = image.load(path.join('../assets', 'inimigos.png'))
 
-    def __init__(self, x, y, width, height, isEspecial1):
+
+    def __init__(self, x, y, width, height, isEspecial1, icon):
         self.x = x
         self.y = y
         self.width = width
@@ -16,6 +16,9 @@ class Inimigo():
         self.hitbox = (self.x, self.y, self.width, self.height)
         self.vida = 100
         self.isEspecial1 = isEspecial1
+        self.icon = icon 
+        imagens = [ 'inimigos3.png', 'inimigos.png', 'inimigos2.png', 'inimigos4.png' ]
+        self.INIMIGO_BG = image.load(path.join('../assets', imagens[icon]))
     
     def draw(self, janela):
         self.move()
