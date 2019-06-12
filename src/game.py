@@ -1,4 +1,3 @@
-
 import pygame
 from pygame import image
 from os import path
@@ -208,18 +207,9 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     janela.blit(rodolfo, (280,4))
     janela.blit(barbosa, (330, 4))
     janela.blit(chiquinho, (380, 4))
-    if isEspecialInimigo1: 
-        janela.blit(inimigosImgs[1], (450, 4))
-    else: 
-        janela.blit(inimigosImgs[0], (450, 4))
-    if isEspecialInimigo2:
-        janela.blit(inimigosImgs[2], (510, 4))
-    else: 
-        janela.blit(inimigosImgs[0], (510, 4))
-    if isEspecialInimigo3:
-        janela.blit(inimigosImgs[3], (570, 4))
-    else: 
-        janela.blit(inimigosImgs[0], (570, 4))
+    janela.blit(inimigosImgs[1], (450, 4)) if isEspecialInimigo1 else janela.blit(inimigosImgs[0], (450, 4))
+    janela.blit(inimigosImgs[2], (510, 4)) if isEspecialInimigo2 else janela.blit(inimigosImgs[0], (510, 4))
+    janela.blit(inimigosImgs[3], (570, 4)) if isEspecialInimigo3 else janela.blit(inimigosImgs[0], (570, 4))
     
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
@@ -231,7 +221,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         ThayNave.imune = False
     
     # Desenha inimigos
-    if len(inimigos) < 8:
+    if len(inimigos) < 12:
         inimigos.append(Inimigo((randint(14, 20) * 60), (randint(0, 6) * 60) + OFFSET, 60, 60, isEspecialInimigo3))
 
     # Colisão dos inimigos com a Thay
@@ -347,7 +337,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         janela.blit(preto, (150, OFFSET))
 
     # Osmar
-    if especialInimigo3Pontuacao > 1650: 
+    if especialInimigo3Pontuacao > 1500: 
         isEspecialInimigo3 = True
         especialinimigo = inimigosImgs[3]
         especialInimigo3Enable = True

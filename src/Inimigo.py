@@ -11,7 +11,7 @@ class Inimigo():
         self.width = width
         self.height = height
         self.isEspecialInimigo3 = isEspecialInimigo3
-        self.vel = -2 if not isEspecialInimigo3 else -4
+        self.vel = -2 if not isEspecialInimigo3 else randint(-5, -2)
         self.hitbox = (self.x, self.y, self.width, self.height)
         self.vida = 100
         imagens = [ 'inimigos3.png', 'inimigos.png', 'inimigos2.png', 'inimigos4.png' ]
