@@ -15,7 +15,7 @@ WIDTH = 780
 HEIGHT = 510
 OFFSET = 50
 RUN = True
-icon = image.load(path.join('../assets', 'inimigos.png'))
+icon = image.load(path.join('../assets', 'thay.png'))
 bgs = [pygame.image.load(path.join('../assets', 'bg3.jpg')), pygame.image.load(path.join('../assets', 'bg.jpg'))]
 BG = bgs[0]
 # THAY TROCAR PRA IMAGEM CERTA
