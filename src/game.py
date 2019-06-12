@@ -336,7 +336,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         janela.blit(preto, (150, OFFSET))
 
     # Osmar
-    if especialInimigo3Pontuacao > 100: 
+    if especialInimigo3Pontuacao > 1650: 
         isEspecialInimigo3 = True
         especialinimigo = inimigosImgs[2]
         especialInimigo3Enable = True
