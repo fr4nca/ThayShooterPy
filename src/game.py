@@ -15,8 +15,8 @@ HEIGHT = 510
 OFFSET = 50
 RUN = True
 icon = image.load(path.join('../assets', 'thay.png'))
-bgs = [pygame.image.load(path.join('../assets', 'bg3.jpg')), pygame.image.load(path.join('../assets', 'bg.jpg'))]
-BG = bgs[0]
+bgs = [image.load(path.join('../assets', 'bg3.jpg')), image.load(path.join('../assets', 'background.png')), image.load(path.join('../assets', 'background2.png')) ,image.load(path.join('../assets', 'background3.png'))]
+background = bgs[0]
 preto = image.load(path.join('../assets', 'preto.png'))
 
 # Globais
@@ -51,6 +51,9 @@ chiquinho = chiquinhoImgs[1]
 
 
 inimigosImgs = [image.load(path.join('../assets', 'rubia.png')), image.load(path.join('../assets', 'oswaldo.png')), image.load(path.join('../assets', 'osmar.png'))]
+
+backgroundCont = 1
+backgroundPontuacao = 0
 
 # Rubia - troca os controles
 isEspecialInimigo1 = False
@@ -106,6 +109,12 @@ def reset():
     global especialInimigo3Enable 
     global especialInimigo3Pontuacao
 
+    global backgroundPontuacao
+    global backgroundCont
+
+    backgroundCont = 1
+    backgroundPontuacao = 0
+
     # Rodolfo - Tiros mais fortes
     isEspecial1 = False
     especial1Timer = 0
@@ -160,7 +169,10 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     global RUN
     global recorde
     global bgs
-    global BG
+    global background
+
+    global backgroundPontuacao
+    global backgroundCont
     
     global isEspecial1
     global especial1Enabled
@@ -196,7 +208,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
 
     janela.fill((0,0,0))
-    janela.blit(BG, (0, OFFSET)) 
+    janela.blit(background, (0, OFFSET)) 
     pontos = fonte.render("Pontuação: " + str(floor(pontuacao)), 1, (255, 255, 255))
     janela.blit(pontos, (630, 10))
     janela.blit(rodolfo, (280,4))
@@ -265,6 +277,16 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
                     if projetil in projeteis:
                         projeteis.pop(projeteis.index(projetil))
                     continue
+
+
+    if backgroundPontuacao == 1000:
+        if backgroundCont >3:
+            backgroundCont = 0
+        background = bgs[backgroundCont]
+        backgroundCont += 1
+        backgroundPontuacao = 0
+
+    backgroundPontuacao += 1
 
     # Especiais amigos
     if especial1Pontuacao > 1000: 
