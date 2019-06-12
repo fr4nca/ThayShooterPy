@@ -248,7 +248,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
             if inimigo.x < 0 - inimigo.width:
                 inimigos.pop(inimigos.index(inimigo))
         else:
-            pontuacao += 20
+            pontuacao += 10
             inimigos.pop(inimigos.index(inimigo))
 
         if inimigo.x == 0 and not isEspecial3:
