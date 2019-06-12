@@ -3,7 +3,7 @@ from pygame import image, draw, font, display
 
 # Classe da jogador
 class Thay():
-    THAY_BG = image.load(path.join('../assets', 'ThayShooter2.png'))
+    THAY_BG = image.load(path.join('../assets', 'thay.png'))
 
     def __init__(self, x, y, width, height, isEspecial2, isEspecial3):
         self.isEspecial2 = isEspecial2

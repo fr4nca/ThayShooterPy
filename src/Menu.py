@@ -44,7 +44,7 @@ class Menu:
                         selected="start"
                     elif event.key==pygame.K_DOWN:
                         selected="quit"
-                    if event.key==pygame.K_RETURN or event.key == pygame.K_KP_ENTER or event.key == pygame.K_x:
+                    if event.key==pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                         if selected=="start":       
                             menu=False
                         if selected=="quit":
@@ -86,7 +86,7 @@ class Menu:
                         selected="restart"
                     elif event.key==pygame.K_DOWN:
                         selected="quit"
-                    if event.key==pygame.K_RETURN or event.key == pygame.K_KP_ENTER or event.key == pygame.K_x:
+                    if event.key==pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                         if selected=="restart":       
                             menu=False
                         if selected=="quit":
@@ -143,7 +143,7 @@ class Menu:
                         selected="resume"
                     elif event.key==pygame.K_DOWN:
                         selected="quit"
-                    if event.key==pygame.K_RETURN or event.key == pygame.K_KP_ENTER or event.key == pygame.K_x:
+                    if event.key==pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                         if selected=="resume":       
                             menu=False
                         if selected=="quit":

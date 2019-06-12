@@ -52,7 +52,7 @@ chiquinhoImgs = [image.load(path.join('../assets', 'chiquinho_ativo.png')), imag
 chiquinho = chiquinhoImgs[1]
 
 
-inimigosImgs = [image.load(path.join('../assets', 'vazio.png')), image.load(path.join('../assets', 'rubia.png')), image.load(path.join('../assets', 'oswaldo.png'))]
+inimigosImgs = [image.load(path.join('../assets', 'vazio.png')), image.load(path.join('../assets', 'rubia.png')), image.load(path.join('../assets', 'oswaldo.png')), image.load(path.join('../assets', 'osmar.png'))]
 especialinimigo = inimigosImgs[0]
 
 # Rubia - troca os controles
@@ -208,7 +208,18 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     janela.blit(rodolfo, (280,4))
     janela.blit(barbosa, (330, 4))
     janela.blit(chiquinho, (380, 4))
-    janela.blit(especialinimigo, (520, 4))
+    if isEspecialInimigo1: 
+        janela.blit(inimigosImgs[1], (450, 4))
+    else: 
+        janela.blit(inimigosImgs[0], (450, 4))
+    if isEspecialInimigo2:
+        janela.blit(inimigosImgs[2], (510, 4))
+    else: 
+        janela.blit(inimigosImgs[0], (510, 4))
+    if isEspecialInimigo3:
+        janela.blit(inimigosImgs[3], (570, 4))
+    else: 
+        janela.blit(inimigosImgs[0], (570, 4))
     
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
@@ -338,7 +349,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     # Osmar
     if especialInimigo3Pontuacao > 1650: 
         isEspecialInimigo3 = True
-        especialinimigo = inimigosImgs[2]
+        especialinimigo = inimigosImgs[3]
         especialInimigo3Enable = True
 
     especialInimigo3Pontuacao += 1
@@ -348,7 +359,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         especialInimigo3Timer += 1
     if especialInimigo3Timer > 230:
         isEspecialInimigo3 = False
-        especialinimigo = inimigosImgs[0]
+        especialinimigo = inimigosImgs[3]
         especialInimigo3Pontuacao = 0
         especialInimigo3Timer = 0
         
@@ -422,9 +433,9 @@ def teclas(ThayNave, projeteis, inimigos):
     if keys[pygame.K_x] and tiroTimer == 0:
         if len(projeteis) < 18:
             if len(projeteis) > 0:
-                projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0), isEspecial1))
+                projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 3), 3, (255, 0, 0), isEspecial1))
             elif len(projeteis) == 0: 
-                projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 2), 3, (255, 0, 0), isEspecial1))
+                projeteis.append(Projetil(round(ThayNave.x + ThayNave.width // 2), round(ThayNave.y + ThayNave.height // 3), 3, (255, 0, 0), isEspecial1))
             tiroTimer = 1
 
     if especial1Timer > 0:
