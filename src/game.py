@@ -196,6 +196,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     global isEspecialInimigo3
     global especialInimigo3Pontuacao
     global especialInimigo3Enable
+    global especialInimigo3Timer
 
     fonte = pygame.font.SysFont('comicsans', 24, True)
     fonte2 = pygame.font.SysFont('comicsans', 100, True)
@@ -220,7 +221,7 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     
     # Desenha inimigos
     if len(inimigos) < 8:
-        inimigos.append(Inimigo((randint(14, 20) * 60), (randint(0, 6) * 60) + OFFSET, 60, 60, isEspecial1, randint(0,3)))
+        inimigos.append(Inimigo((randint(14, 20) * 60), (randint(0, 6) * 60) + OFFSET, 60, 60, isEspecialInimigo3))
 
     # Colisão dos inimigos com a Thay
     for inimigo in inimigos:
@@ -332,7 +333,27 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         especialInimigo2Timer = 1
 
     if isEspecialInimigo2:
-        janela.blit(preto, (0, OFFSET))
+        janela.blit(preto, (150, OFFSET))
+
+    # Osmar
+    if especialInimigo3Pontuacao > 1650: 
+        isEspecialInimigo3 = True
+        especialinimigo = inimigosImgs[2]
+        especialInimigo3Enable = True
+
+    especialInimigo3Pontuacao += 1
+
+    if especialInimigo3Timer > 0:
+        especialInimigo3Enable = False
+        especialInimigo3Timer += 1
+    if especialInimigo3Timer > 230:
+        isEspecialInimigo3 = False
+        especialinimigo = inimigosImgs[0]
+        especialInimigo3Pontuacao = 0
+        especialInimigo3Timer = 0
+        
+    if especialInimigo3Enable:
+        especialInimigo3Timer = 1
 
     pygame.display.update()
 

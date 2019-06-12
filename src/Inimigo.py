@@ -5,20 +5,17 @@ import random
 
 # Classe do inimigo
 class Inimigo():
-
-
-    def __init__(self, x, y, width, height, isEspecial1, icon):
+    def __init__(self, x, y, width, height, isEspecialInimigo3):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-        self.vel = -3
+        self.isEspecialInimigo3 = isEspecialInimigo3
+        self.vel = -2 if not isEspecialInimigo3 else -4
         self.hitbox = (self.x, self.y, self.width, self.height)
         self.vida = 100
-        self.isEspecial1 = isEspecial1
-        self.icon = icon 
         imagens = [ 'inimigos3.png', 'inimigos.png', 'inimigos2.png', 'inimigos4.png' ]
-        self.INIMIGO_BG = image.load(path.join('../assets', imagens[icon]))
+        self.INIMIGO_BG = image.load(path.join('../assets', imagens[randint(0,3)]))
     
     def draw(self, janela):
         self.move()
