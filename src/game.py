@@ -17,7 +17,6 @@ RUN = True
 icon = image.load(path.join('../assets', 'thay.png'))
 bgs = [pygame.image.load(path.join('../assets', 'bg3.jpg')), pygame.image.load(path.join('../assets', 'bg.jpg'))]
 BG = bgs[0]
-# THAY TROCAR PRA IMAGEM CERTA
 preto = image.load(path.join('../assets', 'preto.png'))
 
 # Globais
@@ -51,15 +50,13 @@ chiquinhoImgs = [image.load(path.join('../assets', 'chiquinho_ativo.png')), imag
 chiquinho = chiquinhoImgs[1]
 
 
-inimigosImgs = [image.load(path.join('../assets', 'vazio.png')), image.load(path.join('../assets', 'rubia.png')), image.load(path.join('../assets', 'oswaldo.png')), image.load(path.join('../assets', 'osmar.png'))]
-especialinimigo = inimigosImgs[0]
+inimigosImgs = [image.load(path.join('../assets', 'rubia.png')), image.load(path.join('../assets', 'oswaldo.png')), image.load(path.join('../assets', 'osmar.png'))]
 
 # Rubia - troca os controles
 isEspecialInimigo1 = False
 especialInimigo1Timer = 0
 especialInimigo1Enable = False
 especialInimigo1Pontuacao = 0
-
 
 # Oswaldo - diminui visão do mapa
 isEspecialInimigo2 = False
@@ -181,8 +178,6 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     global chiquinho
     global chiquinhoImgs
 
-    global especialinimigo
-
     global isEspecialInimigo1
     global especialInimigo1Pontuacao
     global especialInimigo1Enable
@@ -207,9 +202,9 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     janela.blit(rodolfo, (280,4))
     janela.blit(barbosa, (330, 4))
     janela.blit(chiquinho, (380, 4))
-    janela.blit(inimigosImgs[1], (450, 4)) if isEspecialInimigo1 else janela.blit(inimigosImgs[0], (450, 4))
-    janela.blit(inimigosImgs[2], (510, 4)) if isEspecialInimigo2 else janela.blit(inimigosImgs[0], (510, 4))
-    janela.blit(inimigosImgs[3], (570, 4)) if isEspecialInimigo3 else janela.blit(inimigosImgs[0], (570, 4))
+    janela.blit(inimigosImgs[0], (450, 4)) if isEspecialInimigo1 else None
+    janela.blit(inimigosImgs[1], (510, 4)) if isEspecialInimigo2 else None
+    janela.blit(inimigosImgs[2], (570, 4)) if isEspecialInimigo3 else None
     
     # Desenha a Thay
     ThayNave.draw(janela, fonte)
@@ -308,7 +303,6 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     # Rubia
     if especialInimigo1Pontuacao > 650:
         isEspecialInimigo1 = True
-        especialinimigo = inimigosImgs[1]
         especialInimigo1Enable = True
 
     especialInimigo1Pontuacao += 1
@@ -316,7 +310,6 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     # Oswaldo
     if especialInimigo2Pontuacao > 1000: 
         isEspecialInimigo2 = True
-        especialinimigo = inimigosImgs[2]
         especialInimigo2Enable = True
 
     especialInimigo2Pontuacao += 1
@@ -326,7 +319,6 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         especialInimigo2Timer += 1
     if especialInimigo2Timer > 300:
         isEspecialInimigo2 = False
-        especialinimigo = inimigosImgs[0]
         especialInimigo2Pontuacao = 0
         especialInimigo2Timer = 0
         
@@ -339,7 +331,6 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
     # Osmar
     if especialInimigo3Pontuacao > 1500: 
         isEspecialInimigo3 = True
-        especialinimigo = inimigosImgs[3]
         especialInimigo3Enable = True
 
     especialInimigo3Pontuacao += 1
@@ -349,7 +340,6 @@ def drawWindow(janela, ThayNave, projeteis, inimigos):
         especialInimigo3Timer += 1
     if especialInimigo3Timer > 230:
         isEspecialInimigo3 = False
-        especialinimigo = inimigosImgs[3]
         especialInimigo3Pontuacao = 0
         especialInimigo3Timer = 0
         
@@ -384,8 +374,6 @@ def teclas(ThayNave, projeteis, inimigos):
     global especialInimigo1Pontuacao
     global especialInimigo1Enable
 
-    global especialinimigo
-
     keys = pygame.key.get_pressed()
 
     # Movimentos da Thay
@@ -407,7 +395,6 @@ def teclas(ThayNave, projeteis, inimigos):
         especialInimigo1Timer += 1
     if especialInimigo1Timer > 250:
         isEspecialInimigo1 = False
-        especialinimigo = inimigosImgs[0]
         especialInimigo1Pontuacao = 0
         especialInimigo1Timer = 0
         
